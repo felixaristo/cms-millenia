@@ -1,0 +1,545 @@
+html {
+    scroll-behavior: smooth;
+}
+
+.color-tone{
+    background: rgb(21,30,103);
+    background: linear-gradient(0deg, rgba(140,12,12,1) 0%, rgba(221,68,10,1) 59%);
+}
+
+#kontakkami{
+    padding: 50px 100px 20px 100px;
+}
+
+.item-artikel:hover{
+    cursor: pointer;
+}
+
+.banner:hover{
+    cursor: pointer;
+}
+
+.discovery-btn{
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px; 
+    border: 1px solid black; 
+    display: inline-block; 
+    padding: 5px 50px 5px 50px;
+    width: 100%;
+}
+
+.discovery-btn img{
+    margin: -3px 0px 0px 5px;
+}
+
+.discovery-btn:hover{
+    cursor: pointer;
+}
+
+.vsc-popup-header{
+    height: 10px;
+    padding: 0px!important;
+    background-color: green!important;
+}
+
+.vsc-popup-body{
+    border: 1px solid green;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.vsc-popup-header p{
+    visibility: hidden;
+}
+
+.vsc-popup-button--default{
+    background-color: green!important;
+}
+
+.navbar1{
+    padding: 20px 50px 20px 50px;
+}
+
+.navbar1-item a{
+    color: white;
+}
+
+.navbar2{
+    padding: 20px 50px 20px 50px;
+}
+
+.top-10{
+    margin-top: 10px;
+}
+
+.footer-right{
+    padding-top: 12%;
+}
+
+.aboutus-left{
+    padding: 50px 100px 0px 100px;
+}
+
+.aboutus-right{
+    display: flex; 
+    gap: 10px; 
+    padding: 20px 100px 50px 70px;
+}
+
+.section1-left{
+    color: white; 
+    padding: 50px 10px 50px 150px;
+}
+
+.section1-right{
+    text-align: center; 
+    padding-top: 50px;
+}
+
+.section2{
+    padding: 50px 100px 20px 100px;
+}
+
+.section2 .row{
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.section2-content{
+    display: flex;
+}
+
+.section2 img{
+    margin-right: 20px;
+    width: 60px;
+}
+
+.partner img{
+    margin-right: 20px;
+    width: 130px;
+    margin-bottom: 50px;
+}
+
+.section2 p{
+    font-size: 14px;
+    text-align: justify;
+}
+
+.section3-left{
+    color: white; 
+    padding: 40px 0px 0px 120px;
+}
+
+.current-article{
+    padding: 50px 300px 30px 300px;
+}
+
+.other-article{
+    padding: 50px 300px 10px 300px;
+}
+
+.section3-right{
+    color: white; 
+    display: flex; 
+    gap: 10px; 
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 80px;
+}
+
+.section3-left .desc{
+    font-size: 40px;
+}
+
+.section3-right .angka{
+    font-size: 40px;
+}
+
+.aboutus{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.aboutus-right .title{
+    font-size: 50px;
+}
+
+.footer .title{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.articles img{
+    width: 200px;
+}
+
+.articles{
+    padding: 50px 100px 20px 100px; 
+    background-color: #f9f9f9;
+}
+
+.articles img{
+    margin-right: 30px;
+}
+
+.chooseus{
+    padding: 0px 100px 50px 100px;
+}
+
+.chooseus .title{
+    text-align: center; 
+    font-size: 50px;
+    margin-bottom: 40px;
+}
+
+.chooseus img{
+    width: 200px;
+    margin-right: 20px;
+}
+
+.chooseus h4{
+    font-size: 20px;
+}
+
+.chooseus p{
+    text-align: justify;
+    font-size: 12px;
+}
+
+.chooseus .container{
+    display: flex;
+    overflow-x: auto;
+    gap: 30px;
+}
+
+.chooseus .item{
+    display: flex; 
+    width: 700px;
+    flex: 0 0 35em;
+}
+
+.chooseus .item img{
+    width: 150px;
+}
+
+@media (min-width: 1300px) {
+    /* > 1400px */
+    .container-xxl{
+        max-width: 100% !important;
+    }
+    .navbar2{
+        display: none;
+    }
+
+    .aboutus-left img{
+        width: 650px;
+    }
+}
+
+@media (max-width: 1300px) {
+    /* < 1300px */
+    .container-xxl{
+        max-width: 100% !important;
+    }
+    .navbar1{
+        display: none;
+    }
+
+    .aboutus-left img{
+        width: 100%;
+    }
+
+    .chooseus img{
+        width: 400px;
+    }
+
+    .maps iframe{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .section1-left{
+        color: white; 
+        padding: 80px;
+    }
+
+    .section1-left h2{
+        font-size: 18px;
+    }
+
+    .section1-left p{
+        font-size: 12px;
+    }
+
+    .section1-right{
+        text-align: center; 
+        padding-top: 0px;
+    }
+
+    .section1-right img{
+        width: 200px;
+        padding-top: 12%;
+    }
+
+    .aboutus-right .title{
+        font-size: 70px;
+    }
+
+    .aboutus-left img{
+        width: 550px;
+    }
+    
+}
+
+@media (max-width: 1135px) {
+    .section3-right{
+        color: white; 
+        display: flex; 
+        gap: 10px; 
+        padding-top: 20px;
+        padding-bottom: 30px;
+        padding-left: 80px;
+    }
+
+    .section3-right .angka{
+        font-size: 20px;
+    }
+
+    .section3-right .desc{
+        font-size: 10px;
+    }
+
+    .section3-left .desc{
+        font-size: 30px;
+    }
+
+    .aboutus-right .title{
+        font-size: 50px;
+    }
+}
+
+
+@media (max-width: 767px) {
+    .section1-left{
+        color: white; 
+        padding:50px 50px 10px 50px;
+    }
+
+    .section1-right img{
+        padding-top: 0px;
+        width: 170px;
+    }
+
+    .section2 img{
+        width: 50px;
+    }
+    
+    .section2 p{
+        font-size: 12px;
+        text-align: justify;
+    }
+
+    .section2 h4{
+        font-size: 16px;
+    }
+
+    .section2{
+        padding: 50px 50px 20px 50px;
+    }
+
+    .section3-left .desc{
+        font-size: 20px;
+    }
+    
+    .section3-right .angka{
+        font-size: 20px;
+    }
+
+    .section3-right .desc{
+        font-size: 10px;
+    }
+
+    .section3-left{
+        color: white; 
+        padding: 20px 0px 0px 120px;
+    }
+
+    .section3-right{ 
+        gap: 40px; 
+    }
+
+    .chooseus img{
+        width: 300px;
+    }
+
+    .aboutus-right .title{
+        font-size: 30px;
+    }
+
+    .aboutus-left{
+        padding: 70px 50px 0px 50px;
+    }
+
+    .aboutus-left img{
+        width: 100%!important;
+    }
+
+    .aboutus-right{
+        display: flex; 
+        gap: 10px; 
+        padding: 20px 50px 50px 50px;
+    }
+
+    .footer-right {
+        text-align: left;
+    }
+
+    .footer-right .logo{
+        width: 150px;
+        margin-bottom: 10px;
+    }
+
+    .footer .title-container{
+        text-align: center;
+    }
+    
+    .articles img{
+        width: 100px;
+    }
+
+    .articles h4{
+        font-size: 15px;
+    }
+
+    .articles p{
+        font-size: 12px;
+        text-align: justify;
+    }
+
+    .articles{
+        padding: 10px 50px 20px 50px; 
+        background-color: #f9f9f9;
+    }
+
+
+    .chooseus{
+        padding: 0px 50px 50px 50px;
+    }
+    
+    .chooseus .title{
+        text-align: center; 
+        font-size: 30px;
+        margin-bottom: 40px;
+    }
+    
+    .chooseus img{
+        width: 100px;
+        margin-right: 20px;
+    }
+    
+    .chooseus h4{
+        font-size: 20px;
+    }
+    
+    .chooseus p{
+        text-align: justify;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 500px) {
+    .item-artikel .thumbnail{
+        height: unset!important;
+        padding-top: 10px;
+    }
+
+    .current-article{
+        padding: 40px;
+    }
+
+    .other-article{
+        padding: 40px;
+    }
+
+    .discovery-btn{
+        width: 100%;
+        text-align: center;
+        font-size: 10px;
+        margin-bottom: 20px;
+        display: inline-flex;
+        padding: 5px 0px 5px 20px;
+        justify-content: center;
+    }
+
+    .discovery-btn img{
+        margin-top: 1px;
+        width: 12px!important;
+        height: 12px;
+    }
+
+    .footer{
+        padding: 50px 50px 20px 50px !important;
+    }
+
+    #kontakkami{
+        padding: 50px 50px 20px 50px;
+    }
+
+    .section3-left .desc{
+        font-size: 15px;
+    }
+
+    .section3-left{
+        color: white; 
+        padding: 20px 0px 0px 60px;
+    }
+
+    .section3-right{
+        color: white; 
+        display: flex; 
+        gap: 10px; 
+        padding-top: 30px;
+        padding-bottom: 30px;
+        padding-left: 70px;
+        text-align: center;
+    }
+
+    .aboutus{
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    
+}
+
+
+@media (max-width: 900px) {
+    .aboutus-left img{
+        width: 150%;
+    }
+
+    .section3-left .desc{
+        font-size: 20px;
+    }
+
+   
+
+    .articles img{
+        width: 80px;
+    }
+
+    .articles h4{
+        font-size: 15px;
+    }
+
+    .articles p{
+        font-size: 12px;
+        text-align: justify;
+    }
+
+    .articles{
+        padding: 10px 50px 20px 50px; 
+        background-color: #f9f9f9;
+    }
+}
+

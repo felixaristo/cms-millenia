@@ -1,0 +1,32 @@
+{
+  "name": "compro2",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@ckeditor/ckeditor5-vue": "^7.3.0",
+    "axios": "^1.7.9",
+    "bootstrap": "^5.3.3",
+    "bootstrap-vue-next": "^0.26.22",
+    "jquery": "^3.7.1",
+    "react-whatsapp-widget": "^2.2.0",
+    "sweetalert2": "^11.17.2",
+    "tinymce": "^7.7.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
+    "vue-social-chat": "^1.0.0",
+    "vue-whatsapp-widget": "^1.0.0",
+    "vue-wysiwyg": "^1.7.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "unplugin-vue-components": "^28.0.0",
+    "vite": "^6.0.11",
+    "vite-plugin-vue-devtools": "^7.7.0"
+  }
+}
