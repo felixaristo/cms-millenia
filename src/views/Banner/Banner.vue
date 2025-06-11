@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
             tes: "ok"
         },
         data(){
-            const fields = ['image', 'title', 'description', 'action']
+            const fields = ['image', 'article', 'action']
             const items = []
             return {
                 data: null,
@@ -18,19 +18,19 @@ import Swal from 'sweetalert2';
             }
         },
         methods: {
-            gotoArticle(id){
-                window.location.href = "/update-article/" + id
+            gotoBanner(id){
+                window.location.href = "/update-banner/" + id
             },
             gotoPage(page){
-                router.push('add-article');
+                router.push(page);
             },
             logout(){
                 sessionStorage.clear();
                 location.reload();
             },
-            async deleteArticle(id, title){
+            async deleteBanner(id){
                 // alert(title);
-                console.log(title);
+                console.log(id);
                 
                 Swal.fire({
                     title: "Are you sure want to delete?",
@@ -58,14 +58,14 @@ import Swal from 'sweetalert2';
                 });
             },
             async deleteFunction(id){
-                return await axios.delete(import.meta.env.VITE_BASE_URL_API + 'article/delete/' + id).then((resp) => {
+                return await axios.delete(import.meta.env.VITE_BASE_URL_API + 'banner/delete/' + id).then((resp) => {
                     console.log(resp.status);
                     return resp.status;
                 })
             },
             async getData(){
                 
-                await axios.get(import.meta.env.VITE_BASE_URL_API + 'article/list/1/100').then((resp) => {
+                await axios.get(import.meta.env.VITE_BASE_URL_API + 'banner/list/1/100').then((resp) => {
                     console.log(resp.status);
                     
                     this.items = JSON.parse(JSON.stringify(this.data))
@@ -163,8 +163,8 @@ import Swal from 'sweetalert2';
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Article</h1>
-                        <span @click="gotoPage('add-article')"  class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
+                        <h1 class="h3 mb-0 text-gray-800">Banner</h1>
+                        <span @click="gotoPage('add-banner')"  class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
                                 class="fas fa-plus fa-sm text-white-50"></i> Add</span>
                     </div>
                     <!-- Content Row -->
@@ -174,10 +174,10 @@ import Swal from 'sweetalert2';
                                 <img :src="row.value" width="200">
                             </template>
                             <template #cell(action)="row2">
-                                <BButton size="sm" class="mr-2 btn-info" v-on:click="gotoArticle(row2.value)">
+                                <BButton size="sm" class="mr-2 btn-info" v-on:click="gotoBanner(row2.value)">
                                     <i class="fas fa-arrow-right fa-sm text-white-100"></i>
                                 </BButton>
-                                <BButton size="sm" class="btn-danger" v-on:click="deleteArticle(row2.value, title)">
+                                <BButton size="sm" class="btn-danger" v-on:click="deleteBanner(row2.value)">
                                     <i class="fas fa-trash fa-sm text-white-100"></i>
                                 </BButton>
                             </template>

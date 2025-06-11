@@ -12,23 +12,22 @@ import Swal from 'sweetalert2'
 // 
     export default{
         data(){
-            const fields = ['No', 'first_name', 'last_name', 'show_details']
-            const items = [
-                {age: 40, first_name: 'Dickerson', last_name: 'Macdonald'},
-                {age: 21, first_name: 'Larsen', last_name: 'Shaw'},
-                {age: 89, first_name: 'Geneva', last_name: 'Wilson'},
-                {age: 38, first_name: 'Jami', last_name: 'Carney'},
-            ]
             
             const file = ref<null | File>(null)
             let dataEditor = null
             let user = null
+            const options = [
+                {text: 'A', value: 'A', disabled: false},
+                {text: 'B', value: 'B', disabled: false},
+                {text: 'C', value: 'C', disabled: false},
+                {text: 'D', value: {d: 1}, disabled: true},
+                {text: 'E', value: 'E', disabled: false},
+                {text: 'F', value: 'F', disabled: false},
+                ]
             return {
                 articleJson: null,
                 currentArticle: null,
                 othersArticle: null,
-                items: items,
-                fields: fields,
                 file: file,
                 dataEditor: dataEditor,
                 title: null,
@@ -36,7 +35,11 @@ import Swal from 'sweetalert2'
                 image: null,
                 content: null,
                 author: null,
-                user: user
+                user: user,
+                previewImage: null,
+                options: options,
+                selected: null,
+                order: null
             }
         },
         methods: {
@@ -46,6 +49,31 @@ import Swal from 'sweetalert2'
             logout(){
                 sessionStorage.clear();
                 location.reload();
+            },
+            async getData(id){
+                await axios.get(import.meta.env.VITE_BASE_URL_API + 'article/list/0/0').then((resp) => {
+                    console.log(resp.status);
+                    
+                    // this.itemsArticle = JSON.parse(JSON.stringify(this.data))
+                    // console.log(JSON.parse(JSON.stringify(this.data)));
+                    this.options = resp.data.data
+                    
+
+                    // this.itemsArticle.forEach(element => {
+                    //     element.action = element.id
+                    // });
+                })
+
+                // this.options = this.itemsArticle
+
+                await axios.get(import.meta.env.VITE_BASE_URL_API + 'banner/detail/' + id).then((resp) => {
+                    console.log(resp);
+                    let items = resp.data.data
+                    this.title = items.title
+                    this.selected = items.article
+                    this.order = items.order
+                    this.previewImage = items.image
+                })
             },
             async submitForm(){
                 // console.log(this.dataEditor);
@@ -57,17 +85,15 @@ import Swal from 'sweetalert2'
                 let userData = sessionStorage.getItem('user');
                 userData = JSON.parse(userData);
 
-                formData.append('title', this.title);
-                formData.append('image', this.image);
-                formData.append('author', userData.id);
-                formData.append('description', this.description);
-                formData.append('content', this.dataEditor);
+                if(this.image !== null){
+                    formData.append('image', this.image);
+                }
+                formData.append('article', this.selected);
+                formData.append('order', this.order);
 
+                if(this.selected !== null && this.order !== null){
                 
-
-                if(this.title !== null && this.description !== null && this.image !== null && this.dataEditor !== null){
-                
-                    await axios.post(import.meta.env.VITE_BASE_URL_API + 'article/create', formData).then((resp) => {
+                    await axios.post(import.meta.env.VITE_BASE_URL_API + 'banner/update/' + this.$route.params.id, formData).then((resp) => {
                         console.log(resp.status);
                         console.log(resp);
                         if(resp.status == 200){
@@ -76,7 +102,7 @@ import Swal from 'sweetalert2'
                             text: "Article success uploaded!",
                             icon: "success"
                             }).then(() => {
-                                router.push('/'); 
+                                router.push('/banner'); 
                             })
                         }else{
                             Swal.fire({
@@ -104,7 +130,10 @@ import Swal from 'sweetalert2'
                 router.push('/login');
             }
         },
-        mounted(){}
+        async mounted(){
+            console.log(this.$route.params.id);
+            await this.getData(this.$route.params.id);
+        }
     }
 
     
@@ -124,14 +153,7 @@ import Swal from 'sweetalert2'
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
             <Menu/>
-
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-star"></i>
-                    <span>Banner</span></a>
-            </li> -->
 
 
         </ul>
@@ -177,24 +199,39 @@ import Swal from 'sweetalert2'
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Add Article</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Detail Banner</h1>
                     </div>
                     <BForm>
-                        <BFormGroup class="col-lg-12" id="input-group-2" label="Title" label-for="input-2">
-                            <BFormInput id="input-2"  placeholder="Enter title.." v-model="title" required  />
-                        </BFormGroup><br>
-                        <BFormGroup class="col-lg-12" id="input-group-2" label="Description" label-for="input-2">
+
+                        <!-- <BFormGroup class="col-lg-12" id="input-group-2" label="Description" label-for="input-2">
                             <BFormTextarea placeholder="Enter description..." rows="2" v-model="description" required />
+                        </BFormGroup><br> -->
+                        <div style="margin: 0px 0px 10px 10px;">
+                            <img :src="previewImage" width="500">
+                        </div>
+                        <BFormGroup class="col-lg-12" id="input-group-2" label="Image" label-for="input-2">
+                            <BFormFile v-model="image" />
                         </BFormGroup><br>
+                        <BFormGroup class="col-lg-12" id="input-group-2" label="Article Relation" label-for="input-2">
+                            <BFormSelect
+                                v-model="selected"
+                                :options="options"
+                            />
+                        </BFormGroup><br>
+                        <BFormGroup class="col-lg-12" id="input-group-2" label="Order" label-for="input-2">
+                            <BFormInput id="input-2"  placeholder="Order.." v-model="order" required  />
+                        </BFormGroup><br>
+                        
+<!--                         
                         <BFormGroup class="col-lg-12" id="input-group-2" label="Image" label-for="input-2">
                             <BFormFile v-model="image" />
                         </BFormGroup><br>
                         <BFormGroup class="col-lg-12" id="input-group-2" label="Content" label-for="input-2">
                             <Editor v-model="dataEditor"/>
-                        </BFormGroup><br>
+                        </BFormGroup><br> -->
                         <BFormGroup class="col-lg-12" id="input-group-2" label-for="input-2">
                             <span @click="submitForm()"  class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
-                                class="fas fa-plus fa-sm text-white-50"></i> Submit</span>
+                                class="fa fa-spinner fa-sm text-white-100"></i> Save Changes</span>
                         </BFormGroup><br>
                     </BForm>
 

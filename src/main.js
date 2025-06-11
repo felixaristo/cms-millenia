@@ -7,6 +7,8 @@ import App from './App.vue'
 import router from './router'
 import VueSocialChat from 'vue-social-chat'
 import 'vue-social-chat/dist/style.css'
+import Footer from './views/Components/Footer.vue'
+import Menu from './views/Components/Menu.vue'
 // import VueWhatsappWidget from 'vue-whatsapp-widget/dist/'
 // components: {
 //     VueWhatsappWidget
@@ -17,6 +19,8 @@ const app = createApp(App)
 app.use(VueSocialChat)
 // app.use(wysiwyg);
 // app.use(VueWhatsappWidget)
+app.component('Footer', Footer)
+app.component('Menu', Menu)
 app.use(router)
 app.use(createBootstrap()) // Important
 app.mount('#app')

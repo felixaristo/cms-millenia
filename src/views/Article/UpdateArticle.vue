@@ -129,18 +129,7 @@ import Swal from 'sweetalert2'
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="/">
-                    <i class="fas fa-fw fa-list"></i>
-                    <span>Article</span></a>
-            </li>
-<!-- 
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-star"></i>
-                    <span>Banner</span></a>
-            </li> -->
+            <Menu/>
 
 
         </ul>

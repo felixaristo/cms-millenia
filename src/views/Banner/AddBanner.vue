@@ -23,6 +23,14 @@ import Swal from 'sweetalert2'
             const file = ref<null | File>(null)
             let dataEditor = null
             let user = null
+            const options = [
+                {text: 'A', value: 'A', disabled: false},
+                {text: 'B', value: 'B', disabled: false},
+                {text: 'C', value: 'C', disabled: false},
+                {text: 'D', value: {d: 1}, disabled: true},
+                {text: 'E', value: 'E', disabled: false},
+                {text: 'F', value: 'F', disabled: false},
+                ]
             return {
                 articleJson: null,
                 currentArticle: null,
@@ -36,7 +44,11 @@ import Swal from 'sweetalert2'
                 image: null,
                 content: null,
                 author: null,
-                user: user
+                user: user,
+                itemsArticle: null,
+                selected: null,
+                options: options,
+                order: null
             }
         },
         methods: {
@@ -57,26 +69,27 @@ import Swal from 'sweetalert2'
                 let userData = sessionStorage.getItem('user');
                 userData = JSON.parse(userData);
 
-                formData.append('title', this.title);
+                // formData.append('title', this.title);
                 formData.append('image', this.image);
-                formData.append('author', userData.id);
-                formData.append('description', this.description);
-                formData.append('content', this.dataEditor);
+                formData.append('article', this.selected);
+                formData.append('order', this.order);
+                // formData.append('description', this.description);
+                // formData.append('content', this.dataEditor);
 
                 
 
-                if(this.title !== null && this.description !== null && this.image !== null && this.dataEditor !== null){
+                if(this.image !== null && this.selected !== null && this.order !== null){
                 
-                    await axios.post(import.meta.env.VITE_BASE_URL_API + 'article/create', formData).then((resp) => {
+                    await axios.post(import.meta.env.VITE_BASE_URL_API + 'banner/create', formData).then((resp) => {
                         console.log(resp.status);
                         console.log(resp);
                         if(resp.status == 200){
                             Swal.fire({
                             title: "Success!",
-                            text: "Article success uploaded!",
+                            text: "Banner success uploaded!",
                             icon: "success"
                             }).then(() => {
-                                router.push('/'); 
+                                router.push('/banner'); 
                             })
                         }else{
                             Swal.fire({
@@ -95,8 +108,24 @@ import Swal from 'sweetalert2'
                         icon: "error"
                     })
                 }
-            }
+            },
+            async getData(){
+                await axios.get(import.meta.env.VITE_BASE_URL_API + 'article/list/0/0').then((resp) => {
+                    console.log(resp.status);
+                    
+                    // this.itemsArticle = JSON.parse(JSON.stringify(this.data))
+                    // console.log(JSON.parse(JSON.stringify(this.data)));
+                    this.itemsArticle = resp.data.data
+
+                    this.itemsArticle.forEach(element => {
+                        element.action = element.id
+                    });
+                })
+
+                this.options = this.itemsArticle
+            },
         },
+        
         async setup(){
             let login = await sessionStorage.getItem('login');
             console.log(login);
@@ -104,7 +133,10 @@ import Swal from 'sweetalert2'
                 router.push('/login');
             }
         },
-        mounted(){}
+        mounted(){
+            // alert('ok')
+            this.getData()
+        }
     }
 
     
@@ -177,21 +209,28 @@ import Swal from 'sweetalert2'
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Add Article</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Add Banner</h1>
                     </div>
                     <BForm>
-                        <BFormGroup class="col-lg-12" id="input-group-2" label="Title" label-for="input-2">
-                            <BFormInput id="input-2"  placeholder="Enter title.." v-model="title" required  />
-                        </BFormGroup><br>
-                        <BFormGroup class="col-lg-12" id="input-group-2" label="Description" label-for="input-2">
+                        
+                        <!-- <BFormGroup class="col-lg-12" id="input-group-2" label="Description" label-for="input-2">
                             <BFormTextarea placeholder="Enter description..." rows="2" v-model="description" required />
-                        </BFormGroup><br>
+                        </BFormGroup><br> -->
                         <BFormGroup class="col-lg-12" id="input-group-2" label="Image" label-for="input-2">
                             <BFormFile v-model="image" />
                         </BFormGroup><br>
-                        <BFormGroup class="col-lg-12" id="input-group-2" label="Content" label-for="input-2">
-                            <Editor v-model="dataEditor"/>
+                        <BFormGroup class="col-lg-12" id="input-group-2" label="Article Relation" label-for="input-2">
+                            <BFormSelect
+                                v-model="selected"
+                                :options="options"
+                            />
                         </BFormGroup><br>
+                        <BFormGroup class="col-lg-12" id="input-group-2" label="Order" label-for="input-2">
+                            <BFormInput id="input-2"  placeholder="Order.." v-model="order" required  />
+                        </BFormGroup><br>
+                        <!-- <BFormGroup class="col-lg-12" id="input-group-2" label="Content" label-for="input-2">
+                            <Editor v-model="dataEditor"/>
+                        </BFormGroup><br> -->
                         <BFormGroup class="col-lg-12" id="input-group-2" label-for="input-2">
                             <span @click="submitForm()"  class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
                                 class="fas fa-plus fa-sm text-white-50"></i> Submit</span>
